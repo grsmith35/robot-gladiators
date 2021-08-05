@@ -95,7 +95,7 @@ var startGame = function() {
                 //ask player if they want to visit the shop
                 var storeConfirm = confirm("The fight is over, visit the store before the next fight?");
                 //if yes, take them to store
-                if (storeConfirm) {
+                if (storeConfirm === true) {
                     shop();
                 }
             }
@@ -138,7 +138,44 @@ var endGame = function() {
 
 //create a player store function
 var shop = function() {
-    console.log("entered the shop");
+    var shopOptionPrompt = prompt(
+        "Would you like to REFILL your health, UPGRADE you attack, or LEAVE the store?");
+        // use switch to check user input
+        switch (shopOptionPrompt) {
+            case "REFILL":
+            case "refill":
+                if (playerMoney >= 7) {
+                    alert("Refilling player's health by 20 for 7 dollars.");
+                    //increase health and decrease money
+                    playerHealth = playerHealth + 20;
+                    playerMoney = playerMoney - 7;
+                    }
+                else {
+                    alert("You don't have enough money!")
+                }
+                break;
+            case "UPGRADE":
+            case "upgrade":
+                if (playerMoney >= 7) {
+                    alert("Upgrading player's attack by 6 for 7 dollars.");
+                    //increase attack and decrease money
+                    playerMoney = playerMoney - 7;
+                    playerAttack = playerAttack + 6;
+                }
+                else {
+                    alert("You don't have enough money!")
+                }
+                break;
+            case "LEAVE":
+            case "leave":
+                alert("Leaving the store");
+                break;
+            default:
+                alert("You did not pick a valid option. Try again.");
+                //call shop again to force player to pick a valid option
+                shop();
+                break;
+        }
 };
 
 // start the game when the page loads
