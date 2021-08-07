@@ -23,9 +23,18 @@ var fightOrSkip = function() {
 }
 
 var fight = function(enemy) {
-    
+    var isPlayerTurn = true;
+    // flip coin to see who attacks first.
+    var coin = Math.random();
+    if (coin > .5) {
+        isPlayerTurn = false;
+    }
     //repeat and excute as long as the enemy-robot is alive
     while (enemy.health > 0 && playerInfo.health > 0) {
+        if(isPlayerTurn === true) {
+            
+        }
+        
         //check to see if player wants to fight or skip
         if(fightOrSkip()) {
             break;
@@ -136,19 +145,16 @@ var endGame = function() {
 //create a player store function
 var shop = function() {
     var shopOptionPrompt = prompt(
-        "Would you like to REFILL your health, UPGRADE you attack, or LEAVE the store?");
+        "Would you like to REFILL(1) your health, UPGRADE(2) you attack, or LEAVE(3) the store?");
         // use switch to check user input
         switch (shopOptionPrompt) {
-            case "REFILL":
-            case "refill":
+            case "1":
                 playerInfo.refillHealth();
                 break;
-            case "UPGRADE":
-            case "upgrade":
+            case "2":
                 playerInfo.upgradeAttack();
                 break;
-            case "LEAVE":
-            case "leave":
+            case "3":
                 alert("Leaving the store");
                 break;
             default:
